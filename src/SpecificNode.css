@@ -1,0 +1,34 @@
+.updatenode__content {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 4;
+  font-size: 12px;
+  background-color: azure;
+  height: 200px;
+  width: 100px;
+  padding: 10px;
+
+}
+
+.updatenode__controls label {
+  display: block;
+}
+
+.updatenode__bglabel {
+  margin-top: 10px;
+}
+
+.updatenode__checkboxwrapper {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.react-flow__node-checkboxNode {
+  font-size: 12px;
+  background: #eee;
+  border: 1px solid #555;
+  border-radius: 5px;
+  text-align: center;
+}
