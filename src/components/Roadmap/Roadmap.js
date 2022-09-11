@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, memo } from "react";
+import React, { useCallback, useState, useEffect, memo, useMemo, useRef } from "react";
 import ReactFlow, {
   addEdge,
   MiniMap,
@@ -9,10 +9,8 @@ import ReactFlow, {
   Handle,
 } from "react-flow-renderer";
 
-import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
@@ -28,11 +26,7 @@ import {
 
 import "./Roadmap.css";
 
-// TODO: awful hack
-let setNodesGlobal = null;
-let nodesGlobal = null;
-
-const WithCheckboxNode = memo(({ data, isConnectable, id }) => {
+const WithCheckboxNode = memo(({ data, isConnectable, id, setNodes, nodesRef }) => {
   return (
     <>
       <Handle
@@ -59,21 +53,21 @@ const WithCheckboxNode = memo(({ data, isConnectable, id }) => {
             checked={data.done}
             onClick={(e) => e.stopPropagation()}
             onChange={(evt) => {
-              const nodeIndex = nodesGlobal.findIndex((n) => n.id === id);
+              const nodeIndex = nodesRef.current.findIndex((n) => n.id === id);
 
               if (nodeIndex) {
-                const isDone = nodesGlobal[nodeIndex]?.data?.done;
-                setNodesGlobal([
-                  ...nodesGlobal.slice(0, nodeIndex),
+                const isDone = nodesRef.current[nodeIndex]?.data?.done;
+                setNodes([
+                  ...nodesRef.current.slice(0, nodeIndex),
                   {
-                    ...nodesGlobal[nodeIndex],
+                    ...nodesRef.current[nodeIndex],
                     data: {
-                      ...nodesGlobal[nodeIndex].data,
+                      ...nodesRef.current[nodeIndex].data,
                       // done: !nodesGlobal[nodeIndex].data,
                       done: !isDone,
                     },
                   },
-                  ...nodesGlobal.slice(nodeIndex + 1),
+                  ...nodesRef.current.slice(nodeIndex + 1),
                 ]);
               }
               // console.log(setNodesGlobal());
@@ -102,8 +96,16 @@ const WithCheckboxNode = memo(({ data, isConnectable, id }) => {
   );
 });
 
-const nodeTypes = {
-  checkboxNode: WithCheckboxNode,
+const WithNodesState = (Component, nodesRef, setNodes) => {
+  return function ({ data, isConnectable, id }) {
+    return <Component
+      data={data}
+      isConnectable={isConnectable}
+      id={id}
+      nodesRef={nodesRef}
+      setNodes={setNodes}
+    />
+  };
 };
 
 const onInit = (reactFlowInstance) =>
@@ -157,10 +159,17 @@ const Roadmap = (props) => {
     );
   }, [currentNodeId, nodes, toggleComments, localComments]);
 
+  const nodesRef = useRef(nodes);
+
   useEffect(() => {
-    setNodesGlobal = setNodes;
-    nodesGlobal = nodes;
+    nodesRef.current = nodes;
   }, [nodes, setNodes]);
+
+  const nodeTypes = useMemo(() => {
+    return {
+      checkboxNode: WithNodesState(WithCheckboxNode, nodesRef, setNodes),
+    };
+  }, [setNodes]);
 
   useEffect(() => {
     setNodes((nds) =>
