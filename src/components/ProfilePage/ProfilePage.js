@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 
 import {useParams, useNavigate} from 'react-router-dom';
 
@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 
 import Avatar from '@material-ui/core/Avatar';
 
+import Box from '@material-ui/core/Box';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
@@ -23,6 +24,8 @@ import OpenPositions from '../OpenPositions';
 
 import {useAppContext} from '../../context/AppContext';
 
+import Roadmap from '../Roadmap';
+
 import {useStyles} from './ProfilePage.styles';
 
 const PageProfile = ({
@@ -32,6 +35,8 @@ const PageProfile = ({
 
   const navigate = useNavigate();
   const {positionId} = useParams();
+
+  const [roadmapId, setRoadmapId] = useState(null);
 
   const classes = useStyles();
 
@@ -43,10 +48,9 @@ const PageProfile = ({
     navigate('/profile');
   }, [navigate]);
 
-  const onSeeJourney = useCallback(() => {
-    // TODO: navigate to journey
-    navigate('/roadmap/1');
-  }, [navigate]);
+  const onSeeJourney = useCallback((id) => () => {
+    setRoadmapId((currId) => id === currId ? null : id)
+  }, []);
 
   const onLogout = useCallback(() => {
     setState((prev) => {
@@ -101,7 +105,10 @@ const PageProfile = ({
           positionId ?
             <React.Fragment>
               <div className={classes.openPositionWrapper}>
-                <OpenPosition id={positionId} onSeeJourney={onSeeJourney} />
+                <OpenPosition id={positionId} onSeeJourney={onSeeJourney(positionId)} roadmapId={roadmapId} />
+                {
+                  roadmapId && <Roadmap id={positionId}/>
+                }
               </div>
               <Divider orientation='vertical'/>
               <div className={classes.availableMentorsWrapper}>
@@ -111,6 +118,7 @@ const PageProfile = ({
             <OpenPositions onPositionSelect={onPositionSelect} />
         }
       </div>
+
     </div>
   </AppHeader>;
 };

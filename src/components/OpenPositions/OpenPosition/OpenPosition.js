@@ -89,7 +89,8 @@ const Section = ({
 
 export default function OpenPosition ({
   id,
-  onSeeJourney
+  onSeeJourney,
+  roadmapId,
 }) {
   const classes = useStyles();
 
@@ -118,7 +119,7 @@ export default function OpenPosition ({
           onClick={onSeeJourney}
           className={classes.seeJourneyButton}
       >
-        See Journey
+        {roadmapId ? 'Hide ' : 'See '} Journey
       </Button>
     </div>
   }

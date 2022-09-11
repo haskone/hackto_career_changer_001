@@ -231,7 +231,9 @@ const nodeTypes = {
 const onInit = (reactFlowInstance) =>
   console.log("flow loaded:", reactFlowInstance);
 
-const Roadmap = () => {
+const Roadmap = (props) => {
+  const { id } = props;
+
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const onConnect = useCallback(
