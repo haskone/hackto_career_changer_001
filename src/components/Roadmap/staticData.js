@@ -22,14 +22,14 @@ export const initialNodes1 = [
           authorUrl: '#',
           avatarUrl: 'https://cdn-icons-png.flaticon.com/512/2922/2922510.png',
           createdAt: new Date(),
-          fullName: 'Lihuén Martin',
-          text: 'Too small, can we have more questions here?',
+          fullName: 'Lihuén Martin [Mentor]',
+          text: 'Are these quizzes synced with the database?',
         },
         {
           authorUrl: '#',
           avatarUrl: 'https://cdn-icons-png.flaticon.com/512/2922/2922510.png',
           createdAt: new Date(),
-          fullName: 'Dene Ketill',
+          fullName: 'Dene Ketill [Mentor]',
           text: 'Also, we need to add preparation material here',
         },
       ]
@@ -58,7 +58,7 @@ export const initialNodes1 = [
           authorUrl: '#',
           avatarUrl: 'https://cdn-icons-png.flaticon.com/512/2922/2922510.png',
           createdAt: new Date(),
-          fullName: 'Lihuén Martin',
+          fullName: 'Lihuén Martin [Mentor]',
           text: 'Which platform to use?',
         },
       ]
@@ -76,7 +76,7 @@ export const initialNodes1 = [
           authorUrl: '#',
           avatarUrl: 'https://cdn-icons-png.flaticon.com/512/2922/2922561.png',
           createdAt: new Date(),
-          fullName: 'Alexandra Shahrzad',
+          fullName: 'Alexandra Shahrzad [Mentor]',
           text: 'Lol, didnt know we have any',
         }
       ]
@@ -117,7 +117,7 @@ export const initialNodes1 = [
           authorUrl: '#',
           avatarUrl: 'https://cdn-icons-png.flaticon.com/512/2922/2922561.png',
           createdAt: new Date(),
-          fullName: 'Alexandra Shahrzad',
+          fullName: 'Alexandra Shahrzad [Mentor]',
           text: 'This one can be retaken a few times maybe? Looks really hard',
         }
       ]
@@ -223,14 +223,14 @@ export const initialNodes2 = [
           authorUrl: '#',
           avatarUrl: 'https://cdn-icons-png.flaticon.com/512/2922/2922510.png',
           createdAt: new Date(),
-          fullName: 'Dene Ketill',
+          fullName: 'Dene Ketill [Mentor]',
           text: 'Need to add more information here',
         },
         {
           authorUrl: '#',
           avatarUrl: 'https://cdn-icons-png.flaticon.com/512/2922/2922561.png',
           createdAt: new Date(),
-          fullName: 'Alexandra Shahrzad',
+          fullName: 'Alexandra Shahrzad [Mentor]',
           text: 'Yeah, that links that I sent you in slack last week',
         }
       ]
