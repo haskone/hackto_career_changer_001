@@ -1,31 +1,74 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 
-import {useStyles} from './OpenPosition.styles';
+import { useStyles } from './OpenPosition.styles';
+
+const mockStyles = {
+  highlight: {
+    fontWeight: 'bold'
+  },
+  xp: {
+    marginBottom: 12
+  },
+  link: {
+    color: '#098afb'
+  },
+  boldLink: {
+    color: '#098afb',
+    fontWeight: 'bold'
+  }
+};
 
 const positionsMock = {
   1: {
-    title: 'UX/UI Developer',
+    title: 'Software Engineer to UX/UI Designer Roadmap',
     sections: [
       {
-        title: 'BASIC QUALIFICATIONS',
+        title: <Typography variant='h5'>Role Qualifications:</Typography>,
         descriptionList: [
-          "Bachelor's degree in design, human-computer interaction (HCI), or equivalent professional experience as an interactive/user experience designer.",
+          "3+ years of experience",
+          "An available online portfolio",
+          "Examples of shipped work across multiple platforms",
+          "Understanding of HTML, Javascript and CSS that informs design and interaction decisions",
+          "Experience designing e-commerce experiences; bonus points in designing for global markets",
         ]
       },
       {
-        title: 'PREFERRED QUALIFICATIONS',
-        description: [
-          "All applicants must meet all qualifications listed above",
-          "Benefits: Amazon provides a full range of benefits for our global employees and their eligible family members. This position is eligible for further pay increases and bonuses at the company's discretion. Eligible employees may also receive signing bonuses and Amazon Restricted Stock Units",
-          "While they might vary from location to location, Amazon benefits for Canada may include: • Health Care • Savings Plans • Income Protection • Paid Time Off • Signing Bonuses • Employee Stock",
-          "Amazon is an Equal Opportunity-Affirmative Action Employer – Minority / Female / Disability / Veteran / Gender Identity / Sexual Orientation",
-          "Amazon is committed to providing employment accommodation in accordance with the Ontario Human Rights Code and the Accessibility for Ontarians with Disabilities Act. If you require accommodations, please notify us when/if you are selected for an interview."
+        title: <Typography variant='body1' style={mockStyles.xp}>
+          You currently have 1 / 5 of the qualifications as a <span style={mockStyles.highlight}>UX/UI designer</span>
+        </Typography>,
+      },
+      {
+        title: <Typography variant='h5'>Resources available at Amazon to help you become a UX/UI Designer:</Typography>,
+        descriptionList: [
+          <div>
+            Career training courses for UX/UI Designer
+            <ul>
+              <li><a style={mockStyles.link} href="https://www.udemy.com/course/user-experience-design-fundamentals/">Visual design principles</a></li>
+              <li><a style={mockStyles.link} href="https://www.udemy.com/course/user-experience-design-fundamentals/">Using figma to create wireframes
+              </a></li>
+              <li><a style={mockStyles.link} href="https://www.udemy.com/course/user-experience-design-fundamentals/">Understand A/B testing processes</a></li>
+            </ul>
+          </div>,
+          <div>
+            Amazon in-house mentors that have been through similar career transitions
+            <ul>
+              <li>Book a 15-minute mentor meeting with them for questions related to the roadmap</li>
+            </ul>
+          </div>
         ]
-      }
+      },
+      {
+        description: [
+          "UX/UI job openings at Amazon:",
+          <a style={mockStyles.boldLink} href="https://www.linkedin.com/jobs/view/3211649615/?alternateChannel=search&refId=RPsc%2FKruHqwXe1q%2BTYC9Dw%3D%3D&trackingId=qiOgwO0%2Bv0IKkdQSAgwp9Q%3D%3D&trk=d_flagship3_search_srp_jobs&lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_jobs%3BNb8hTw5tTxekxDMbLwjTTg%3D%3D">UX Designer, New Advertising Product, Toronto, ON Canada</a>,
+          <a style={mockStyles.boldLink} href="https://www.linkedin.com/jobs/view/3255198973/?alternateChannel=search&refId=RPsc%2FKruHqwXe1q%2BTYC9Dw%3D%3D&trackingId=dsfesHQl1RRuS3xovtW8tw%3D%3D&trk=d_flagship3_search_srp_jobs">Sr. UX Designer, PeopleInsight, PeopleInsight, Toronto, ON Canada</a>,
+          <a style={mockStyles.boldLink} href="https://www.linkedin.com/jobs/view/3237677774/?alternateChannel=search&refId=RPsc%2FKruHqwXe1q%2BTYC9Dw%3D%3D&trackingId=lwJjHo4gkUEfyquAvcVE4g%3D%3D&trk=d_flagship3_search_srp_jobs">Senior UX Designer, Advertising Design Systems & Partner Experience</a>,
+        ]
+      },
     ]
   },
   2: {
@@ -67,13 +110,13 @@ const Section = ({
   const classes = useStyles();
 
   return <div className={classes.sectionRoot}>
-    <Typography variant='h5'>{title}</Typography>
+    {title}
     {
       description ?
         description.map((text, index) => {
           return <Typography
-              className={classes.descriptionItem}
-              key={index}>{text}</Typography>
+            className={classes.descriptionItem}
+            key={index}>{text}</Typography>
         }) :
         null
     }
@@ -87,7 +130,7 @@ const Section = ({
   </div>;
 };
 
-export default function OpenPosition ({
+export default function OpenPosition({
   id,
   onSeeJourney,
   roadmapId,
@@ -114,10 +157,10 @@ export default function OpenPosition ({
         }
       </div>
       <Button
-          variant="contained"
-          color="primary"
-          onClick={onSeeJourney}
-          className={classes.seeJourneyButton}
+        variant="contained"
+        color="primary"
+        onClick={onSeeJourney}
+        className={classes.seeJourneyButton}
       >
         {roadmapId ? 'Hide ' : 'See '} Journey
       </Button>
