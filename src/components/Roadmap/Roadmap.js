@@ -57,10 +57,10 @@ const WithCheckboxNode = memo(({ data, isConnectable, id }) => {
           Done{" "}
           <Checkbox
             checked={data.done}
+            onClick={(e) => e.stopPropagation()}
             onChange={(evt) => {
-
-
               const nodeIndex = nodesGlobal.findIndex((n) => n.id === id);
+
               if (nodeIndex) {
                 const isDone = nodesGlobal[nodeIndex]?.data?.done;
                 setNodesGlobal([
