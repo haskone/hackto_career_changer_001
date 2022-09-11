@@ -25,6 +25,13 @@ export const initialNodes1 = [
           fullName: 'John Smith',
           text: 'Too small, can we have more questions here?',
         },
+        {
+          authorUrl: '#',
+          avatarUrl: 'https://cdn-icons-png.flaticon.com/512/2922/2922510.png',
+          createdAt: new Date(),
+          fullName: 'John Smith',
+          text: 'Also, we need to add preparation material here',
+        },
       ]
     },
     position: { x: 270, y: 210 },
@@ -32,13 +39,30 @@ export const initialNodes1 = [
   },
   {
     id: "2",
-    data: { label: "Learn basics of frames and platform-specific styles", done: false },
+    data: {
+      label: "Learn basics of frames and platform-specific styles",
+      done: false,
+      content:
+        ["For ios", "https://developer.apple.com/design/human-interface-guidelines/guidelines/overview/"],
+    },
     position: { x: 550, y: 20 },
     className: "light",
   },
   {
     id: "3",
-    data: { label: "Have a portfolio with 100+ works", done: false },
+    data: {
+      label: "Have a portfolio with 100+ works",
+      done: false,
+      comments: [
+        {
+          authorUrl: '#',
+          avatarUrl: 'https://cdn-icons-png.flaticon.com/512/2922/2922510.png',
+          createdAt: new Date(),
+          fullName: 'John Smith',
+          text: 'Which platform to use?',
+        },
+      ]
+    },
     position: { x: 550, y: 210 },
     className: "light",
   },
@@ -62,20 +86,42 @@ export const initialNodes1 = [
   },
   {
     id: "41",
-    data: { label: "Intership at 123 department", done: false },
+    data: {
+      label: "Intership at 123 department",
+      done: false,
+      content:
+        ["Link to a special weekend-crash-course", "https://very.internal.link"],
+    },
     position: { x: 550, y: 410 },
     className: "light",
   },
   {
     id: "42",
-    data: { label: "Crash-course in Beb's lab in Montreal", done: false },
+    data: {
+      label: "Crash-course in Beb's lab in Montreal",
+      done: false,
+      content:
+        ["Annother link to a special weekend-crash-course", "https://very.internal.link"],
+    },
     position: { x: 750, y: 510 },
     className: "light",
   },
   {
     id: "50",
     type: "checkboxNode",
-    data: { label: "UX/UI: Final Coding Quiz", done: false, comments: 'This one can be retaken a few times' },
+    data: {
+      label: "UX/UI: Final Coding Quiz",
+      done: false,
+      comments: [
+        {
+          authorUrl: '#',
+          avatarUrl: 'https://cdn-icons-png.flaticon.com/512/2922/2922561.png',
+          createdAt: new Date(),
+          fullName: 'Valerii',
+          text: 'This one can be retaken a few times maybe? Looks really hard',
+        }
+      ]
+    },
     position: { x: 200, y: 600 },
     className: "light",
   },
