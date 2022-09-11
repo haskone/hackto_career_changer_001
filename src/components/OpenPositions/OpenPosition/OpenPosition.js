@@ -34,7 +34,7 @@ const mockStyles = {
 
 const positionsMock = {
   1: {
-    title: 'Software Engineer to UX/UI Developer Journey',
+    title: 'Software Engineer to UX/UI Designer Journey',
     sections: [
       {
         title: <Typography variant='h5'>Role Qualifications:</Typography>,
@@ -48,14 +48,14 @@ const positionsMock = {
       },
       {
         title: <Typography variant='body1' style={mockStyles.xp}>
-          You currently have <span style={mockStyles.purpleBoldHighlight}>1/5</span> of the qualifications as a <span style={mockStyles.boldHighlight}>UX/UI Developer</span>
+          You currently have <span style={mockStyles.purpleBoldHighlight}>1/5</span> of the qualifications as a <span style={mockStyles.boldHighlight}>UX/UI Designer</span>
         </Typography>,
       },
       {
-        title: <Typography variant='h5'>Resources available at Amazon to help you become a UX/UI Developer:</Typography>,
+        title: <Typography variant='h5'>Resources available at Amazon to help you become a UX/UI Designer:</Typography>,
         descriptionList: [
           <div>
-            Career training courses for UX/UI Developer
+            Career training courses for UX/UI Designer
             <ul>
               <li><a style={mockStyles.link} href="https://www.udemy.com/course/user-experience-design-fundamentals/">Visual design principles</a></li>
               <li><a style={mockStyles.link} href="https://www.udemy.com/course/user-experience-design-fundamentals/">Using figma to create wireframes
