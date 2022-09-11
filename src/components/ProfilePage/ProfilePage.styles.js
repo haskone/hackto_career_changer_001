@@ -1,4 +1,4 @@
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
   userPosition: {
     marginTop: 8
   },
+  tenure: {
+    marginTop: 8
+  },
   availableMentorsWrapper: {
     marginTop: 12
   },
@@ -41,4 +44,4 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export {useStyles};
+export { useStyles };

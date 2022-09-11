@@ -1,12 +1,11 @@
-import React, {useCallback, useState} from 'react';
+import React, { useCallback, useState } from 'react';
 
-import {useParams, useNavigate} from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import Typography from '@material-ui/core/Typography';
 
 import Avatar from '@material-ui/core/Avatar';
 
-import Box from '@material-ui/core/Box';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
@@ -15,6 +14,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ExploreIcon from '@material-ui/icons/Explore';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
 import AppHeader from '../AppHeader';
 
@@ -22,11 +22,11 @@ import AvailableMentors from '../OpenPositions/AvailableMentors';
 import OpenPosition from '../OpenPositions/OpenPosition';
 import OpenPositions from '../OpenPositions';
 
-import {useAppContext} from '../../context/AppContext';
+import { useAppContext } from '../../context/AppContext';
 
 import Roadmap from '../Roadmap';
 
-import {useStyles} from './ProfilePage.styles';
+import { useStyles } from './ProfilePage.styles';
 
 const PageProfile = ({
   user
@@ -34,7 +34,7 @@ const PageProfile = ({
   const [, setState] = useAppContext();
 
   const navigate = useNavigate();
-  const {positionId} = useParams();
+  const { positionId } = useParams();
 
   const [roadmapId, setRoadmapId] = useState(null);
 
@@ -80,11 +80,18 @@ const PageProfile = ({
           <Typography className={classes.userPosition}>
             Software Development Engineer 1
           </Typography>
+          <Typography variant="body2" className={classes.tenure}>
+            1.5 years at Amazon
+          </Typography>
         </div>
         <List>
           <ListItem button selected onClick={onExploreClick}>
-            <ListItemIcon><ExploreIcon/></ListItemIcon>
+            <ListItemIcon><ExploreIcon /></ListItemIcon>
             <ListItemText primary="Explore" />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon><SupervisorAccountIcon /></ListItemIcon>
+            <ListItemText primary="Become a mentor" />
           </ListItem>
         </List>
         <Divider />
@@ -99,7 +106,7 @@ const PageProfile = ({
           </ListItem>
         </List>
       </div>
-      <Divider orientation='vertical'/>
+      <Divider orientation='vertical' />
       <div className={classes.body}>
         {
           positionId ?
@@ -107,10 +114,10 @@ const PageProfile = ({
               <div className={classes.openPositionWrapper}>
                 <OpenPosition id={positionId} onSeeJourney={onSeeJourney(positionId)} roadmapId={roadmapId} />
                 {
-                  roadmapId && <Roadmap id={positionId}/>
+                  roadmapId && <Roadmap id={positionId} />
                 }
               </div>
-              <Divider orientation='vertical'/>
+              <Divider orientation='vertical' />
               <div className={classes.availableMentorsWrapper}>
                 <AvailableMentors positionId={positionId} />
               </div>
