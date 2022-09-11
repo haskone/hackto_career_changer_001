@@ -22,14 +22,14 @@ export const initialNodes1 = [
           authorUrl: '#',
           avatarUrl: 'https://cdn-icons-png.flaticon.com/512/2922/2922510.png',
           createdAt: new Date(),
-          fullName: 'John Smith',
+          fullName: 'Lihuén Martin',
           text: 'Too small, can we have more questions here?',
         },
         {
           authorUrl: '#',
           avatarUrl: 'https://cdn-icons-png.flaticon.com/512/2922/2922510.png',
           createdAt: new Date(),
-          fullName: 'John Smith',
+          fullName: 'Lihuén Martin',
           text: 'Also, we need to add preparation material here',
         },
       ]
@@ -58,7 +58,7 @@ export const initialNodes1 = [
           authorUrl: '#',
           avatarUrl: 'https://cdn-icons-png.flaticon.com/512/2922/2922510.png',
           createdAt: new Date(),
-          fullName: 'John Smith',
+          fullName: 'Lihuén Martin',
           text: 'Which platform to use?',
         },
       ]
@@ -76,8 +76,8 @@ export const initialNodes1 = [
           authorUrl: '#',
           avatarUrl: 'https://cdn-icons-png.flaticon.com/512/2922/2922561.png',
           createdAt: new Date(),
-          fullName: 'Valerii',
-          text: 'Lol, didnt know we have any',
+          fullName: 'Alexandra Shahrzad',
+          text: "Lol, didn't know we have any",
         }
       ]
     },
@@ -117,7 +117,7 @@ export const initialNodes1 = [
           authorUrl: '#',
           avatarUrl: 'https://cdn-icons-png.flaticon.com/512/2922/2922561.png',
           createdAt: new Date(),
-          fullName: 'Valerii',
+          fullName: 'Alexandra Shahrzad',
           text: 'This one can be retaken a few times maybe? Looks really hard',
         }
       ]
@@ -223,15 +223,15 @@ export const initialNodes2 = [
           authorUrl: '#',
           avatarUrl: 'https://cdn-icons-png.flaticon.com/512/2922/2922510.png',
           createdAt: new Date(),
-          fullName: 'John Smith',
+          fullName: 'Lihuén Martin',
           text: 'Need to add more information here',
         },
         {
           authorUrl: '#',
           avatarUrl: 'https://cdn-icons-png.flaticon.com/512/2922/2922561.png',
           createdAt: new Date(),
-          fullName: 'Valerii',
-          text: 'Yeah, that links that I sent you in slack last week',
+          fullName: 'Alexandra Shahrzad',
+          text: 'Yeah, that link that I sent you in slack last week',
         }
       ]
     },

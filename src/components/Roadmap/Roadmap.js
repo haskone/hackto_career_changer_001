@@ -58,6 +58,8 @@ const WithCheckboxNode = memo(({ data, isConnectable, id }) => {
           <Checkbox
             checked={data.done}
             onChange={(evt) => {
+
+
               const nodeIndex = nodesGlobal.findIndex((n) => n.id === id);
               if (nodeIndex) {
                 const isDone = nodesGlobal[nodeIndex]?.data?.done;
@@ -215,12 +217,15 @@ const Roadmap = (props) => {
               comments={
                 nodes?.find((n) => n.id === currentNodeId)
                   ?.data?.comments?.length > 0 ?
-                    nodes?.find((n) => n.id === currentNodeId)?.data?.comments :
-                    []
+                  nodes?.find((n) => n.id === currentNodeId)?.data?.comments :
+                  []
               }
               isLoggedIn
+              styles={{
+                comment: base => ({ ...base, textAlign: 'left' }),
+              }}
               reactRouter={false}
-              onSubmit={text => {}}
+              onSubmit={text => { }}
             />
           </Container>
         </Paper>
@@ -240,9 +245,9 @@ const Roadmap = (props) => {
         >
           <Container maxWidth="sm" style={{ backgroundColor: '#ffb74d', height: '100vh', width: '10vw', padding: 15 }} >
             Content:
-            <Box sx={{ maxWidth: '20px'}} >
+            <Box sx={{ maxWidth: '20px' }} >
               {
-              nodes?.find((n) => n.id === currentNodeId)?.data?.content?.map((i, index) =>
+                nodes?.find((n) => n.id === currentNodeId)?.data?.content?.map((i, index) =>
                   <Typography variant="subtitle1" gutterBottom key={index}>
                     {i}
                   </Typography>
