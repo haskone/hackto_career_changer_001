@@ -120,11 +120,37 @@ const Roadmap = (props) => {
   );
 
   const [currentNodeId, setCurrentNodeId] = useState("");
+  const [comments, setComments] = useState([]);
+  const [toggleComments, setToggleComments] = useState(false);
 
   const [nodeId, setNodeId] = useState(1);
   const [nodeName, setNodeName] = useState("Node #4354");
   const [nodeBg, setNodeBg] = useState("#eee");
   const [nodeHidden, setNodeHidden] = useState(false);
+
+  const onCommentSubmit = useCallback((text) => {
+    if (text) {
+      setComments([
+        ...comments,
+        {
+          authorUrl: "#",
+          avatarUrl: "https://charity13.ca/wp-content/uploads/2021/05/adult-women.png",
+          createdAt: new Date(),
+          fullName: "Jamie",
+          text: text,
+        }
+      ]);
+    }
+  }, [comments]);
+
+  useEffect(() => {
+    setComments(
+      nodes?.find((n) => n.id === currentNodeId)
+        ?.data?.comments?.length > 0 && toggleComments ?
+        nodes?.find((n) => n.id === currentNodeId)?.data?.comments :
+        []
+    );
+  }, [currentNodeId, nodes, toggleComments]);
 
   useEffect(() => {
     setNodesGlobal = setNodes;
@@ -175,6 +201,9 @@ const Roadmap = (props) => {
       onEdgesChange={onEdgesChange}
       onNodeClick={(e, n) => {
         setCurrentNodeId(n?.id);
+        setToggleComments((prev) => {
+          return !prev;
+        });
       }}
       nodeTypes={nodeTypes}
       onConnect={onConnect}
@@ -202,7 +231,7 @@ const Roadmap = (props) => {
       <Background color="#ffaacc" gap={2} />
 
       {
-        nodes?.find((n) => n.id === currentNodeId)?.data?.comments?.length > 0 &&
+        comments.length > 0 &&
         <Paper
           style={{
             position: 'absolute',
@@ -214,18 +243,13 @@ const Roadmap = (props) => {
         >
           <Container maxWidth="sm" style={{ backgroundColor: '#e3f2fd', height: '100vh', width: '15vw', padding: 15, }} >
             <CommentsBlock
-              comments={
-                nodes?.find((n) => n.id === currentNodeId)
-                  ?.data?.comments?.length > 0 ?
-                  nodes?.find((n) => n.id === currentNodeId)?.data?.comments :
-                  []
-              }
+              comments={comments}
               isLoggedIn
               styles={{
                 comment: base => ({ ...base, textAlign: 'left' }),
               }}
               reactRouter={false}
-              onSubmit={text => { }}
+              onSubmit={text => onCommentSubmit(text)}
             />
           </Container>
         </Paper>
