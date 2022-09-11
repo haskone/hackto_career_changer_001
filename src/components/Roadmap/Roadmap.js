@@ -19,6 +19,13 @@ import Paper from '@material-ui/core/Paper';
 
 import CommentsBlock from 'simple-react-comments';
 
+import {
+  initialEdges1,
+  initialNodes1,
+  initialNodes2,
+  initialEdges2,
+} from './staticData';
+
 import "./Roadmap.css";
 
 // TODO: awful hack
@@ -93,137 +100,6 @@ const WithCheckboxNode = memo(({ data, isConnectable, id }) => {
   );
 });
 
-const initialNodes = [
-  {
-    id: "1",
-    type: "input",
-    data: {
-      label: "QA / Testing Software Engineer",
-      content:
-        ["Read this first", "https://www.coursera.org/articles/software-developer"],
-      done: true,
-    },
-    position: { x: 250, y: 1 },
-    className: "light",
-  },
-  {
-    id: "20",
-    type: "checkboxNode",
-    data: { label: "Coding: Minimal Quiz", done: false, comments: 'This one can be retaken a few times' },
-    position: { x: 270, y: 210 },
-    className: "light",
-  },
-  {
-    id: "2",
-    data: { label: "Learn more about code style", done: false },
-    position: { x: 550, y: 20 },
-    className: "light",
-  },
-  {
-    id: "3",
-    data: { label: "Algorithms, 100+ problems on leetcode.com", done: false },
-    position: { x: 550, y: 210 },
-    className: "light",
-  },
-  {
-    id: "4",
-    data: { label: "Code review process in the company", done: false },
-    position: { x: 650, y: 310 },
-    className: "light",
-  },
-  {
-    id: "41",
-    data: { label: "Intership at 123 department", done: false },
-    position: { x: 550, y: 410 },
-    className: "light",
-  },
-  {
-    id: "42",
-    data: { label: "Crash-course in Beb's lab in Montreal", done: false },
-    position: { x: 750, y: 510 },
-    className: "light",
-  },
-  {
-    id: "50",
-    type: "checkboxNode",
-    data: { label: "Coding: Final Coding Quiz", done: false, comments: 'This one can be retaken a few times' },
-    position: { x: 200, y: 600 },
-    className: "light",
-  },
-  {
-    id: "5",
-    data: { label: "SDE I", done: false },
-    position: { x: 400, y: 800 },
-    className: "light",
-  },
-];
-
-const initialEdges = [
-  {
-    id: "e1-20",
-    source: "1",
-    target: "20",
-    animated: true,
-    label: "Very first quiz",
-  },
-  {
-    id: "e20-1",
-    source: "20",
-    target: "2",
-    animated: true,
-    label: "So your code doesnt look ugly for our teams",
-  },
-  {
-    id: "e2-3",
-    source: "2",
-    target: "3",
-    animated: true,
-    label: "Most of QA's dont focus on it, but for us it's crucial",
-  },
-  {
-    id: "e3-4",
-    source: "3",
-    target: "4",
-    animated: true,
-    label: "Most newbiews are scared",
-  },
-  {
-    id: "e4-41",
-    source: "4",
-    target: "41",
-    animated: true,
-    label: "This is the most obvious path",
-  },
-  {
-    id: "e4-42",
-    source: "4",
-    target: "42",
-    animated: true,
-    label: "Much harder, but much faster",
-  },
-  {
-    id: "e41-50",
-    source: "41",
-    target: "50",
-    animated: true,
-    label: "So you can start right away",
-  },
-  {
-    id: "e42-50",
-    source: "42",
-    target: "50",
-    animated: false,
-    label: "TODO: add a node to explain some internal policies",
-  },
-  {
-    id: "e50-5",
-    source: "50",
-    target: "5",
-    animated: false,
-    label: "By someone from dev department, contact in the chat",
-  },
-];
-
 const nodeTypes = {
   checkboxNode: WithCheckboxNode,
 };
@@ -234,8 +110,8 @@ const onInit = (reactFlowInstance) =>
 const Roadmap = (props) => {
   const { id } = props;
 
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [nodes, setNodes, onNodesChange] = useNodesState(id === '1' ? initialNodes1 : initialNodes2);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(id === '1' ? initialEdges1 : initialEdges2);
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
     [],
@@ -324,40 +200,30 @@ const Roadmap = (props) => {
       <Background color="#ffaacc" gap={2} />
 
       {
-        nodes?.find((n) => n.id === currentNodeId)?.data?.comments &&
+        nodes?.find((n) => n.id === currentNodeId)?.data?.comments?.length > 0 &&
         <Paper
-        style={{
-          position: 'absolute',
-          left: '0px',
-          top: '0px',
-          zIndex: 4,
-        }}
-        variant="outlined"
-      >
-        <Container maxWidth="sm" style={{ backgroundColor: '#e3f2fd', height: '100vh', width: '15vw', padding: 15, }} >
-          <CommentsBlock
-            comments={[
-              {
-                authorUrl: '#',
-                avatarUrl: 'https://gravatar.com/avatar/4ecb06692e333043357859e9bcc84d4a?s=400&d=robohash&r=x',
-                createdAt: new Date(),
-                fullName: 'John Smith',
-                text: 'Need to add more information here',
-              },
-              {
-                authorUrl: '#',
-                avatarUrl: 'https://robohash.org/4ecb06692e333043357859e9bcc84d4a?set=set4&bgset=&size=400x400',
-                createdAt: new Date(),
-                fullName: 'Valerii',
-                text: 'Yeah, that links that I sent you in slack last week',
+          style={{
+            position: 'absolute',
+            left: '0px',
+            top: '0px',
+            zIndex: 4,
+          }}
+          variant="outlined"
+        >
+          <Container maxWidth="sm" style={{ backgroundColor: '#e3f2fd', height: '100vh', width: '15vw', padding: 15, }} >
+            <CommentsBlock
+              comments={
+                nodes?.find((n) => n.id === currentNodeId)
+                  ?.data?.comments?.length > 0 ?
+                    nodes?.find((n) => n.id === currentNodeId)?.data?.comments :
+                    []
               }
-            ]}
-            isLoggedIn
-            reactRouter={false}
-            onSubmit={text => {}}
-          />
-        </Container>
-      </Paper>
+              isLoggedIn
+              reactRouter={false}
+              onSubmit={text => {}}
+            />
+          </Container>
+        </Paper>
       }
 
       {
@@ -375,35 +241,13 @@ const Roadmap = (props) => {
           <Container maxWidth="sm" style={{ backgroundColor: '#ffb74d', height: '100vh', width: '10vw', padding: 15 }} >
             Content:
             <Box sx={{ maxWidth: '20px'}} >
-              {/* {nodes?.find((n) => n.id === currentNodeId)?.data?.content?.map(i => <div>{i}</div>)} */}
-              <Typography variant="h6" gutterBottom>
-                h6. Heading
-              </Typography>
-              <Typography variant="subtitle1" gutterBottom>
-                subtitle1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
-              </Typography>
-              <Typography variant="subtitle2" gutterBottom>
-                subtitle2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
-              </Typography>
-              <Typography variant="body1" gutterBottom>
-                body1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
-                unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam
-                dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-              </Typography>
-              <Typography variant="body2" gutterBottom>
-                body2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
-                unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam
-                dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-              </Typography>
-              <Typography variant="button" display="block" gutterBottom>
-                button text
-              </Typography>
-              <Typography variant="caption" display="block" gutterBottom>
-                caption text
-              </Typography>
-              <Typography variant="overline" display="block" gutterBottom>
-                overline text
-              </Typography>
+              {
+              nodes?.find((n) => n.id === currentNodeId)?.data?.content?.map((i, index) =>
+                  <Typography variant="subtitle1" gutterBottom key={index}>
+                    {i}
+                  </Typography>
+                )
+              }
             </Box>
           </Container>
         </Box>
