@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
   body: {
     width: '100%',
     display: 'flex',
-    padding: theme.spacing(0, 0, 0, 3)
   },
   avatarContainer: {
     display: 'flex',
@@ -38,9 +37,12 @@ const useStyles = makeStyles((theme) => ({
   availableMentorsWrapper: {
     marginTop: 12
   },
-  openPositionWrapper: {
-    marginTop: 12,
+  openPositionAndRoadmapWrapper: {
+    overflow: 'auto',
     flex: 1
+  },
+  openPositionWrapper: {
+    paddingLeft: 12
   }
 }));
 

@@ -111,8 +111,14 @@ const PageProfile = ({
         {
           positionId ?
             <React.Fragment>
-              <div className={classes.openPositionWrapper}>
-                <OpenPosition id={positionId} onSeeJourney={onSeeJourney(positionId)} roadmapId={roadmapId} />
+              <div className={classes.openPositionAndRoadmapWrapper}>
+                <div className={classes.openPositionWrapper}>
+                  <OpenPosition
+                    id={positionId}
+                    onSeeJourney={onSeeJourney(positionId)}
+                    roadmapId={roadmapId}
+                  />
+                </div>
                 {
                   roadmapId && <Roadmap id={positionId} />
                 }
