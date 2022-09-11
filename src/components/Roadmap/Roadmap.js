@@ -121,6 +121,7 @@ const Roadmap = (props) => {
 
   const [currentNodeId, setCurrentNodeId] = useState("");
   const [comments, setComments] = useState([]);
+  const [localComments, setLocalComments] = useState([]);
   const [toggleComments, setToggleComments] = useState(false);
 
   const [nodeId, setNodeId] = useState(1);
@@ -130,27 +131,31 @@ const Roadmap = (props) => {
 
   const onCommentSubmit = useCallback((text) => {
     if (text) {
-      setComments([
-        ...comments,
-        {
-          authorUrl: "#",
-          avatarUrl: "https://charity13.ca/wp-content/uploads/2021/05/adult-women.png",
-          createdAt: new Date(),
-          fullName: "Jamie",
-          text: text,
-        }
-      ]);
+      const comment = {
+        authorUrl: "#",
+        avatarUrl: "https://charity13.ca/wp-content/uploads/2021/05/adult-women.png",
+        createdAt: new Date(),
+        fullName: "Jamie",
+        text: text,
+      };
+
+      setLocalComments((prev) => {
+        return [
+          ...prev,
+          comment
+        ]
+      });
     }
-  }, [comments]);
+  }, []);
 
   useEffect(() => {
     setComments(
       nodes?.find((n) => n.id === currentNodeId)
         ?.data?.comments?.length > 0 && toggleComments ?
-        nodes?.find((n) => n.id === currentNodeId)?.data?.comments :
+        [...nodes?.find((n) => n.id === currentNodeId)?.data?.comments, ...localComments] :
         []
     );
-  }, [currentNodeId, nodes, toggleComments]);
+  }, [currentNodeId, nodes, toggleComments, localComments]);
 
   useEffect(() => {
     setNodesGlobal = setNodes;
