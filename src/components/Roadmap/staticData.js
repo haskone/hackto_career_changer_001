@@ -29,7 +29,7 @@ export const initialNodes1 = [
           authorUrl: '#',
           avatarUrl: 'https://cdn-icons-png.flaticon.com/512/2922/2922510.png',
           createdAt: new Date(),
-          fullName: 'Lihuén Martin',
+          fullName: 'Dene Ketill',
           text: 'Also, we need to add preparation material here',
         },
       ]
@@ -77,7 +77,7 @@ export const initialNodes1 = [
           avatarUrl: 'https://cdn-icons-png.flaticon.com/512/2922/2922561.png',
           createdAt: new Date(),
           fullName: 'Alexandra Shahrzad',
-          text: "Lol, didn't know we have any",
+          text: 'Lol, didnt know we have any',
         }
       ]
     },
@@ -223,7 +223,7 @@ export const initialNodes2 = [
           authorUrl: '#',
           avatarUrl: 'https://cdn-icons-png.flaticon.com/512/2922/2922510.png',
           createdAt: new Date(),
-          fullName: 'Lihuén Martin',
+          fullName: 'Dene Ketill',
           text: 'Need to add more information here',
         },
         {
@@ -231,7 +231,7 @@ export const initialNodes2 = [
           avatarUrl: 'https://cdn-icons-png.flaticon.com/512/2922/2922561.png',
           createdAt: new Date(),
           fullName: 'Alexandra Shahrzad',
-          text: 'Yeah, that link that I sent you in slack last week',
+          text: 'Yeah, that links that I sent you in slack last week',
         }
       ]
     },
