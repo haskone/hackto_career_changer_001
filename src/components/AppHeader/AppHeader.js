@@ -12,6 +12,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import {useStyles} from './AppHeader.styles';
 
 export default function PrimarySearchAppBar({
+  title,
   children
 }) {
   const classes = useStyles();
@@ -30,7 +31,7 @@ export default function PrimarySearchAppBar({
             <MenuIcon />
           </IconButton> */}
           <Typography className={classes.title} variant="h6" noWrap>
-            Profile
+            {title}
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>

@@ -6,11 +6,39 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex'
   },
   sidebar: {
-    maxWidth: 360
+    minWidth: 360,
+    backgroundColor: '#f0f8ff'
   },
   body: {
-    width: '100%'
+    width: '100%',
+    display: 'flex',
+    padding: theme.spacing(0, 0, 0, 3)
   },
+  avatarContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: 12
+  },
+  largeAvatar: {
+    width: 80,
+    height: 80
+  },
+  userName: {
+    fontWeight: 500,
+    marginTop: 8
+  },
+  userPosition: {
+    marginTop: 8
+  },
+  availableMentorsWrapper: {
+    marginTop: 12
+  },
+  openPositionWrapper: {
+    marginTop: 12,
+    flex: 1
+  }
 }));
 
 export {useStyles};

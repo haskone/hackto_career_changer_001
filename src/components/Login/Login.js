@@ -37,14 +37,22 @@ export default function SignIn() {
   const navigate = useNavigate();
 
   const classes = useStyles();
+
   const authAPI = useMemo(() => {
     return new AuthAPI();
-  });
+  }, []);
 
   const [state, setState] = useAppContext();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    // warn: client side redirect
+    if (state.auth.user) {
+      navigate('/profile', {replace: true});
+    }
+  }, [state.auth.user, navigate]);
 
   const onSignIn = useCallback(async (e) => {
     e.preventDefault();
@@ -67,13 +75,9 @@ export default function SignIn() {
 
       navigate('/profile', {replace: true});
     } catch (e) {
-      alert('failure');
+      alert('Something went wrong!');
     }
-  }, [email, password]);
-
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
+  }, [navigate, authAPI, email, password, setState]);
 
   const onEmailChange = useCallback((e) => {
     setEmail(e.target.value.trim());

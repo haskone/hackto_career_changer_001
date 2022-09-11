@@ -5,25 +5,25 @@ export default class AuthAPI {
   }) {
     return Promise.resolve({
       user: {
-        email: 'email',
-        name: 'name',
+        email: 'jamie@gmail.com',
+        name: 'Jamie',
         profilePic: 'pic.png'
       }
     });
 
-    const resp = fetch('/login', {
-      type: 'POST',
-      credentials: 'include',
-      data: JSON.stringify({
-        email,
-        password
-      })
-    });
+    // const resp = fetch('/login', {
+    //   type: 'POST',
+    //   credentials: 'include',
+    //   data: JSON.stringify({
+    //     email,
+    //     password
+    //   })
+    // });
 
-    if (resp.ok) {
-      return resp.json();
-    }
+    // if (resp.ok) {
+    //   return resp.json();
+    // }
     
-    return resp;
+    // return resp;
   }
 }
