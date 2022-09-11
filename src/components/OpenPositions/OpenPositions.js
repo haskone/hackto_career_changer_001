@@ -17,7 +17,7 @@ const OpenPositions = ({
 
   return (
     <div className={classes.root}>
-      <Typography variant='h4' className={classes.positionTitle}>Select your journey</Typography>
+      <Typography variant='h4' className={classes.positionTitle}>Select your roadmap</Typography>
       <div className={classes.openPositions}>
         <OpenPositionItem
           id="1"
@@ -29,7 +29,7 @@ const OpenPositions = ({
         <OpenPositionItem
           id="2"
           onPrimaryActionClick={onPositionClick}
-          title="Software Engineer to Project Manager"
+          title="Software Engineer to Project Manager Roadmap"
           image="https://cdn-icons-png.flaticon.com/512/2554/2554433.png"
           description="Are you looking for your next Program/Project Manager role, but not sure where to start? Well, you have found the right place! At Amazon, we are working to be the most customer-centric company on earth."
           className={classes.openPosition}
