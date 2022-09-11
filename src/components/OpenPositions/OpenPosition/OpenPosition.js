@@ -7,11 +7,14 @@ import Typography from '@material-ui/core/Typography';
 import { useStyles } from './OpenPosition.styles';
 
 const mockStyles = {
-  highlight: {
+  boldHighlight: {
     fontWeight: 'bold'
   },
   xp: {
     marginBottom: 12
+  },
+  listMargin: {
+    marginTop: 8
   },
   link: {
     color: '#098afb'
@@ -19,12 +22,19 @@ const mockStyles = {
   boldLink: {
     color: '#098afb',
     fontWeight: 'bold'
+  },
+  purpleBoldHighlight: {
+    color: '#3f51b5',
+    fontWeight: 'bold'
+  },
+  noBulletDecoration: {
+    visibility: 'hidden'
   }
 };
 
 const positionsMock = {
   1: {
-    title: 'Software Engineer to UX/UI Designer Roadmap',
+    title: 'Software Engineer to UX/UI Designer Journey',
     sections: [
       {
         title: <Typography variant='h5'>Role Qualifications:</Typography>,
@@ -38,7 +48,7 @@ const positionsMock = {
       },
       {
         title: <Typography variant='body1' style={mockStyles.xp}>
-          You currently have 1 / 5 of the qualifications as a <span style={mockStyles.highlight}>UX/UI designer</span>
+          You currently have <span style={mockStyles.purpleBoldHighlight}>1/5</span> of the qualifications as a <span style={mockStyles.boldHighlight}>UX/UI designer</span>
         </Typography>,
       },
       {
@@ -53,7 +63,7 @@ const positionsMock = {
               <li><a style={mockStyles.link} href="https://www.udemy.com/course/user-experience-design-fundamentals/">Understand A/B testing processes</a></li>
             </ul>
           </div>,
-          <div>
+          <div style={mockStyles.listMargin}>
             Amazon in-house mentors that have been through similar career transitions
             <ul>
               <li>Book a 15-minute mentor meeting with them for questions related to the roadmap</li>
@@ -63,7 +73,7 @@ const positionsMock = {
       },
       {
         description: [
-          "UX/UI job openings at Amazon:",
+          <Typography variant='h5'>UX/UI job openings at Amazon:</Typography>,
           <a style={mockStyles.boldLink} href="https://www.linkedin.com/jobs/view/3211649615/?alternateChannel=search&refId=RPsc%2FKruHqwXe1q%2BTYC9Dw%3D%3D&trackingId=qiOgwO0%2Bv0IKkdQSAgwp9Q%3D%3D&trk=d_flagship3_search_srp_jobs&lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_jobs%3BNb8hTw5tTxekxDMbLwjTTg%3D%3D">UX Designer, New Advertising Product, Toronto, ON Canada</a>,
           <a style={mockStyles.boldLink} href="https://www.linkedin.com/jobs/view/3255198973/?alternateChannel=search&refId=RPsc%2FKruHqwXe1q%2BTYC9Dw%3D%3D&trackingId=dsfesHQl1RRuS3xovtW8tw%3D%3D&trk=d_flagship3_search_srp_jobs">Sr. UX Designer, PeopleInsight, PeopleInsight, Toronto, ON Canada</a>,
           <a style={mockStyles.boldLink} href="https://www.linkedin.com/jobs/view/3237677774/?alternateChannel=search&refId=RPsc%2FKruHqwXe1q%2BTYC9Dw%3D%3D&trackingId=lwJjHo4gkUEfyquAvcVE4g%3D%3D&trk=d_flagship3_search_srp_jobs">Senior UX Designer, Advertising Design Systems & Partner Experience</a>,
