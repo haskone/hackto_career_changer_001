@@ -45,7 +45,7 @@ const PageProfile = ({
 
   const onSeeJourney = useCallback(() => {
     // TODO: navigate to journey
-    // navigate('/profile');
+    navigate('/roadmap/1');
   }, [navigate]);
 
   const onLogout = useCallback(() => {

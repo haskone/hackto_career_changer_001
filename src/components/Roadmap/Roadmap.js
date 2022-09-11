@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState, useEffect, memo } from "react";
 import ReactFlow, {
   addEdge,
   MiniMap,
@@ -9,25 +9,35 @@ import ReactFlow, {
   Handle,
 } from "react-flow-renderer";
 
-import "./SpecificNode.css";
+import TextField from '@material-ui/core/TextField';
+import Checkbox from '@material-ui/core/Checkbox';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
+
+import CommentsBlock from 'simple-react-comments';
+
+import "./Roadmap.css";
 
 // TODO: awful hack
 let setNodesGlobal = null;
 let nodesGlobal = null;
 
-const WithCheckboxNode = ({ data, isConnectable, id }) => {
+const WithCheckboxNode = memo(({ data, isConnectable, id }) => {
   return (
     <>
       <Handle
         type="target"
-        position="left"
+        position="top"
         style={{ background: "#555" }}
-        onConnect={(params) => console.log("handle onConnect", params)}
+        onConnect={(params) => console.log("handle  onConnect", params)}
         isConnectable={isConnectable}
       />
       <div
         style={{
-          height: "50px",
+          height: "70px",
           padding: "10px",
           display: "flex",
           flexDirection: "column",
@@ -38,8 +48,7 @@ const WithCheckboxNode = ({ data, isConnectable, id }) => {
       >
         <span>
           Done{" "}
-          <input
-            type="checkbox"
+          <Checkbox
             checked={data.done}
             onChange={(evt) => {
               const nodeIndex = nodesGlobal.findIndex((n) => n.id === id);
@@ -82,7 +91,7 @@ const WithCheckboxNode = ({ data, isConnectable, id }) => {
       />
     </>
   );
-};
+});
 
 const initialNodes = [
   {
@@ -91,7 +100,7 @@ const initialNodes = [
     data: {
       label: "QA / Testing Software Engineer",
       content:
-        "Only for ones, who already have some coding experience with python and JS",
+        ["Read this first", "https://www.coursera.org/articles/software-developer"],
       done: true,
     },
     position: { x: 250, y: 1 },
@@ -100,15 +109,14 @@ const initialNodes = [
   {
     id: "20",
     type: "checkboxNode",
-    data: { label: "Coding: Minimal Quiz", done: false },
-    position: { x: 450, y: 110 },
+    data: { label: "Coding: Minimal Quiz", done: false, comments: 'This one can be retaken a few times' },
+    position: { x: 270, y: 210 },
     className: "light",
   },
   {
     id: "2",
-    type: "checkboxNode",
     data: { label: "Learn more about code style", done: false },
-    position: { x: 450, y: 110 },
+    position: { x: 550, y: 20 },
     className: "light",
   },
   {
@@ -136,17 +144,31 @@ const initialNodes = [
     className: "light",
   },
   {
+    id: "50",
+    type: "checkboxNode",
+    data: { label: "Coding: Final Coding Quiz", done: false, comments: 'This one can be retaken a few times' },
+    position: { x: 200, y: 600 },
+    className: "light",
+  },
+  {
     id: "5",
     data: { label: "SDE I", done: false },
-    position: { x: 400, y: 600 },
+    position: { x: 400, y: 800 },
     className: "light",
   },
 ];
 
 const initialEdges = [
   {
-    id: "e1-2",
+    id: "e1-20",
     source: "1",
+    target: "20",
+    animated: true,
+    label: "Very first quiz",
+  },
+  {
+    id: "e20-1",
+    source: "20",
     target: "2",
     animated: true,
     label: "So your code doesnt look ugly for our teams",
@@ -180,18 +202,25 @@ const initialEdges = [
     label: "Much harder, but much faster",
   },
   {
-    id: "e41-5",
+    id: "e41-50",
     source: "41",
-    target: "5",
+    target: "50",
     animated: true,
     label: "So you can start right away",
   },
   {
-    id: "e42-5",
+    id: "e42-50",
     source: "42",
-    target: "5",
+    target: "50",
     animated: false,
     label: "TODO: add a node to explain some internal policies",
+  },
+  {
+    id: "e50-5",
+    source: "50",
+    target: "5",
+    animated: false,
+    label: "By someone from dev department, contact in the chat",
   },
 ];
 
@@ -202,7 +231,7 @@ const nodeTypes = {
 const onInit = (reactFlowInstance) =>
   console.log("flow loaded:", reactFlowInstance);
 
-const OverviewFlow = () => {
+const Roadmap = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const onConnect = useCallback(
@@ -292,34 +321,94 @@ const OverviewFlow = () => {
       <Controls />
       <Background color="#ffaacc" gap={2} />
 
-      <div className="updatenode__content">
-        <label>Content:</label>
-        <br />
-        {nodes?.find((n) => n.id === currentNodeId)?.data?.content}
-        {/* <input
-          value={
-            nodes?.find((n) => n.id === currentNodeId)?.data?.label ||
-            "Select Node"
-          }
-          //   onChange={(evt) => setNodes([
-
-          //   ])}
-        /> */}
-        {/*
-        <label className="updatenode__bglabel">background:</label>
-        <input value={nodeBg} onChange={(evt) => setNodeBg(evt.target.value)} />
-
-        <div className="updatenode__checkboxwrapper">
-          <label>hidden:</label>
-          <input
-            type="checkbox"
-            checked={nodeHidden}
-            onChange={(evt) => setNodeHidden(evt.target.checked)}
+      {
+        nodes?.find((n) => n.id === currentNodeId)?.data?.comments &&
+        <Paper
+        style={{
+          position: 'absolute',
+          left: '0px',
+          top: '0px',
+          zIndex: 4,
+        }}
+        variant="outlined"
+      >
+        <Container maxWidth="sm" style={{ backgroundColor: '#e3f2fd', height: '100vh', width: '15vw', padding: 15, }} >
+          <CommentsBlock
+            comments={[
+              {
+                authorUrl: '#',
+                avatarUrl: 'https://gravatar.com/avatar/4ecb06692e333043357859e9bcc84d4a?s=400&d=robohash&r=x',
+                createdAt: new Date(),
+                fullName: 'John Smith',
+                text: 'Need to add more information here',
+              },
+              {
+                authorUrl: '#',
+                avatarUrl: 'https://robohash.org/4ecb06692e333043357859e9bcc84d4a?set=set4&bgset=&size=400x400',
+                createdAt: new Date(),
+                fullName: 'Valerii',
+                text: 'Yeah, that links that I sent you in slack last week',
+              }
+            ]}
+            isLoggedIn
+            reactRouter={false}
+            onSubmit={text => {}}
           />
-        </div> */}
-      </div>
+        </Container>
+      </Paper>
+      }
+
+      {
+        nodes?.find((n) => n.id === currentNodeId)?.data?.content?.length > 0 &&
+        <Box
+          component="span"
+          color="text.primary"
+          style={{
+            position: 'absolute',
+            right: '0px',
+            top: '0px',
+            zIndex: 4,
+          }}
+        >
+          <Container maxWidth="sm" style={{ backgroundColor: '#ffb74d', height: '100vh', width: '10vw', padding: 15 }} >
+            Content:
+            <Box sx={{ maxWidth: '20px'}} >
+              {/* {nodes?.find((n) => n.id === currentNodeId)?.data?.content?.map(i => <div>{i}</div>)} */}
+              <Typography variant="h6" gutterBottom>
+                h6. Heading
+              </Typography>
+              <Typography variant="subtitle1" gutterBottom>
+                subtitle1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
+              </Typography>
+              <Typography variant="subtitle2" gutterBottom>
+                subtitle2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                body1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
+                unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam
+                dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+              </Typography>
+              <Typography variant="body2" gutterBottom>
+                body2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
+                unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam
+                dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+              </Typography>
+              <Typography variant="button" display="block" gutterBottom>
+                button text
+              </Typography>
+              <Typography variant="caption" display="block" gutterBottom>
+                caption text
+              </Typography>
+              <Typography variant="overline" display="block" gutterBottom>
+                overline text
+              </Typography>
+            </Box>
+          </Container>
+        </Box>
+      }
+
     </ReactFlow>
   );
 };
 
-export default OverviewFlow;
+export default Roadmap;

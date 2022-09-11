@@ -2,10 +2,9 @@ import "./App.css";
 
 import {Routes, Route} from 'react-router-dom';
 
-import SpecificPath from "./SpecificPath";
-
 import Login from './components/Login';
 import ProfilePage from './components/ProfilePage';
+import Roadmap from './components/Roadmap';
 
 import {useAppContext} from './context/AppContext';
 
@@ -34,7 +33,7 @@ function App() {
             </ProtectedRoute>
           } />
         </Route>
-        <Route path="/roadmap" element={<SpecificPath />} />
+        <Route path="/roadmap/:id" element={<Roadmap />} />
       </Routes>
     </div>
   );
