@@ -22,7 +22,7 @@ const OpenPositions = ({
         <OpenPositionItem
           id="1"
           onPrimaryActionClick={onPositionClick}
-          title="Software Engineer to UX/UI Designer Journey"
+          title="Software Engineer to UX/UI Developer Journey"
           image="https://cdn-icons-png.flaticon.com/512/2554/2554442.png"
           description="Are you passionate about innovative technologies like speech? Interested in Amazon Alexa, the brain behind Amazon Echo? The Amazon Alexa team is looking for a Sr. UX Designer to create new customer experiences for Alexa Skills on devices such as Amazon Echo, Amazon Show, Amazon Spot and more."
           className={classes.openPosition} />
