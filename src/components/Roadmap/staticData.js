@@ -127,7 +127,7 @@ export const initialNodes1 = [
   },
   {
     id: "5",
-    data: { label: "UX/UI Developer", done: false },
+    data: { label: "UX/UI Designer", done: false },
     position: { x: 400, y: 800 },
     className: "light",
   },
