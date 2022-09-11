@@ -43,6 +43,10 @@ const useStyles = makeStyles((theme) => ({
   },
   openPositionWrapper: {
     paddingLeft: 12
+  },
+  openPositionsWrapper: {
+    paddingTop: 16,
+    paddingLeft: 16
   }
 }));
 

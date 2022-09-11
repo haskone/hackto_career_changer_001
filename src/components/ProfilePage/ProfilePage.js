@@ -127,8 +127,9 @@ const PageProfile = ({
               <div className={classes.availableMentorsWrapper}>
                 <AvailableMentors positionId={positionId} />
               </div>
-            </React.Fragment> :
-            <OpenPositions onPositionSelect={onPositionSelect} />
+            </React.Fragment> : <div className={classes.openPositionsWrapper}>
+              <OpenPositions onPositionSelect={onPositionSelect} />
+            </div>
         }
       </div>
 
